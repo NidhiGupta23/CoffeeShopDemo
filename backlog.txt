@@ -1,0 +1,12 @@
+Task indicators:
+- DONE : task is completed
+- Ongoing  : task is in progress
+- Pending  : task to do
+- Debugging  :  error resolving issue is in progress
+
+Task To Do:
+a. Main file which will take either take coffee order or display process to make coffee - DONE
+b. Recipe file which will contain coffee recipes - DONE
+c. Add code for order the coffee- Ongoing
+d. Create a new file where all user CRUD operation will work - Ongoing
+e. Add code to create and add data in table for customer information
