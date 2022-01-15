@@ -3,6 +3,8 @@
 
 import time
 import coffeeReceipe as cReceipe
+import coffeeOrder as cOrder
+
 
 # Function prints logo a cup of coffee
 def printWelcome_message():
@@ -23,13 +25,15 @@ def printWelcome_message():
     print(x, '||||||||||||||||||||')
     time.sleep(1)
 
+
 # Function that takes user input in form of string that is type of coffee
-def welcome_menu():
+def welcomeMenu():
     print("Please choose which coffee you like !!!")
     print(" 1. Cappuccino \n 2. Latte \n 3. Mocha \n 4. Espresso")
     coffeeType = input('Coffee needed : ')
     print('Coffee choosed : ', coffeeType.upper())
     return coffeeType.upper()
+
 
 # Function lists types of coffee available in the shop
 def coffeeAvailable(coffeeType):
@@ -41,20 +45,23 @@ def coffeeAvailable(coffeeType):
         print("Want to order again, write yes or no")
         orderAgain = input("Yes or No")
         if orderAgain.upper() == 'YES':
-            welcome_menu()
+            welcomeMenu()
         else:
             print("Thank you for your valuable time !!!")
             exit(0)
+
 
 # Function checks whether an order is placed or process to make coffee
 def procedureOrOrder(coffeeType):
     print('  Want to know procedure or place order \n Type \n 1. Process \n 2. Order ')
     inputRec = input('Type 1 or 2 : ')
     if inputRec == '1':
-        print("Below is the procedure to make your own delicious coffee")
+        print("\n \n \t Below is the procedure to make your own delicious coffee")
         cReceipe.procedureToMakeCoffee(coffeeType)
     elif inputRec == '2':
-        print("Order will be taken care in next patchset"")
+        placeCoffee = cOrder.coffeeOrder()
+        placeCoffee.checkUserAccount()
+        #placeCoffee.coffeePlacement(coffeeType)
     else:
         print("Try again")
 
@@ -62,9 +69,5 @@ def procedureOrOrder(coffeeType):
 # Main code
 if __name__ == '__main__':
     printWelcome_message()
-    coffeeType = welcome_menu()
+    coffeeType = welcomeMenu()
     coffeeAvailable(coffeeType)
-
-
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
