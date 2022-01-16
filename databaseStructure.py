@@ -1,6 +1,6 @@
 # File focus on customer database by using sqlite3
 # A table is created which add, read, update
-# and delete rows
+# and delete rows, i.e., customer information
 
 import sqlite3
 

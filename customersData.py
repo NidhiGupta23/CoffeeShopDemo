@@ -58,6 +58,7 @@ class customersData:
             if remainCredit > -1:
                 upgradedone = self.upgradeData(remainCredit, "credit")
                 if upgradedone == "Successful":
+                    print("Credit in your account is: ", self.uAuth[4])
                     return 1
                 else:
                     return 0
