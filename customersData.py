@@ -10,6 +10,7 @@ import databaseStructure as dbS
 class customersData:
     def __init__(self):
         self.dbFlag = 0
+        self.uAuth = 0
         self.data1 = dbS.dataBaseStructure()
 
     # Check if customer database exists or not
@@ -48,16 +49,28 @@ class customersData:
     # upass: user password
     # uAuth : return value 1 for validate user and 0 for not validate user
     def validate(self, uemail, upass):
-        uAuth = self.data1.checkUserExistence(uemail, upass)
-        return uAuth
+        self.uAuth = self.data1.checkUserExistence(uemail, upass)
+        return self.uAuth[0]
 
     def placeOrder(self, totalAmount):
-        # data = pd.read_sql_query("SELECT * FROM CUSTOMER")
-        # print(data)
-        pass
+        remainCredit = int(self.uAuth[4]) - int(totalAmount)
+        try:
+            if remainCredit > -1:
+                upgradedone = self.upgradeData(remainCredit, "credit")
+                if upgradedone == "Successful":
+                    return 1
+                else:
+                    return 0
+            else:
+                return 2
+        except sqlite3.Error as e:
+            print(e)
 
-    def upgradeData(self):
-        pass
+
+    def upgradeData(self, newValue, column):
+        upgradedone = self.data1.tableUpdation(self.uAuth[3], newValue, column)
+        return upgradedone
+
 
     def deleteCustomerData(self):
         pass

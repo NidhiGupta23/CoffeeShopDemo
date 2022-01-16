@@ -10,6 +10,7 @@ class dataBaseStructure:
         self.connection = sqlite3.connect("Customer5.db")
         self.cursor = self.connection.cursor()
 
+    # Creating databse that is a table with name 'CUSTOMER'
     def tableCreation(self):
         try:
             tablexistscmd = "SELECT COUNT(NAME) FROM SQLITE_MASTER WHERE TYPE='table' AND NAME='CUSTOMER'"
@@ -29,6 +30,7 @@ class dataBaseStructure:
             print(e)
             return False
 
+    # Insert customer details in the customer table
     def tableInsertion(self, fname, lname, pWord, eMail, credit):
         try:
             insertcmd = "INSERT INTO CUSTOMER (FNAME, LNAME, PWORD, EMAIL, CREDIT) VALUES "
@@ -41,15 +43,26 @@ class dataBaseStructure:
             print("Error faced : ", e)
             return 0
 
-    def tableUpdation(self, oldvalue, newvalue):
-        updatecmd = "UPDATE CUSTOMER SET " + newvalue + " WHERE " + oldvalue
-        self.cursor.execute(updatecmd)
-        self.connection.commit()
+    # To update customer details using customer email id along with
+    # column and updated value that needs to be included
+    def tableUpdation(self, userEmail, newValue, column):
+        try:
+            target = column + "= (?)"
+            updatecmd = f"UPDATE CUSTOMER SET {target} WHERE EMAIL=(?)"
+            self.cursor.execute(updatecmd, (newValue, userEmail))
+            self.connection.commit()
+            return "Successful"
+        except sqlite3.Error as e:
+            print("Error faced : ", e)
+            return 0
 
+    # Read database and print them line wise
     def tableRead(self):
         self.cursor.execute("SELECT * FROM CUSTOMER")
         [print(row) for row in self.cursor.fetchall()]
 
+    # Delete customer details or entire database can be removed
+    # ToDo: Give right permission to the Admin
     def tableDelete(self, table, row):
         if table == 'yes':
             self.cursor.execute("DROP TABLE CUSTOMER")
@@ -64,12 +77,12 @@ class dataBaseStructure:
     # return value 1 for validate user and 0 for not validate user
     def checkUserExistence(self, userEmail, userPass):
         try:
-            existencecmd = "SELECT FNAME FROM CUSTOMER WHERE EMAIL=(?) and PWORD=(?)"
+            existencecmd = "SELECT * FROM CUSTOMER WHERE EMAIL=(?) and PWORD=(?)"
             self.cursor.execute(existencecmd, (userEmail, userPass))
             self.connection.commit()
-            firstname = self.cursor.fetchone()
-            if firstname is not None:
-                return firstname
+            cuDetail = self.cursor.fetchone()
+            if cuDetail is not None:
+                return cuDetail
             else:
                 return 0
         except sqlite3.Error as e:
