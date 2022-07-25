@@ -2,27 +2,22 @@
 Project to display working of CRUD operation using product coffee. This project works manually where on run time you will provide some inputs and choose desired coffee. The end result will be either display of your coffee recipe or order accepted.
 
 # Pre-Requirements
-A. To run main.py from CoffeeshopDemo:
+To run main.py from CoffeeshopDemo:
 1. Install python 3.10
 2. Clone https://github.com/NidhiGupta23/CoffeeShopDemo.git
 3. Open VSCode terminal -> cmd -> cd CoffeeShopDemo/src
 4. pip install pandas
 5. pip install IPython
+6. python main.py
 
-B. To run coffeeApi.py from CoffeeshopDemo:
-1. Install python 3.10
-2. Install postman
-2. Clone https://github.com/NidhiGupta23/CoffeeShopDemo.git
-3. Open VSCode terminal -> cmd -> cd CoffeeShopDemo/src
-4. Create virtual envrionment -> python -m venv .venv
-5. set FLASK_APP=coffeeApi.py
-6. flask run
-7. A server will start, copy the link and paste on your brower and perform get method
-8. Open postman and paste the url and perform post, put and delete methods
+# Built-with
+Python3.10
+Sqlite3
 
+# Working
+To display coffee menu, pandas and ipython framework is being used.
+Customer details are being stored using sqlite3. Customer can create new account or login into exiting account and place an order for coffee.
+After successful placement, token number and remainng credit of the customer will be displayed.
 
 # Author:
 Nidhi Gupta
-
-# Purpose: 
-Enhance code skills
